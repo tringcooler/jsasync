@@ -113,6 +113,7 @@ var jsasync = (function() {
 		this._run_hndl.apply(this, arguments);
 	};
 	jsasync.prototype.run = function(seq, args) {
+		if(!args) args = [];
 		var si = [seq, null];
 		return this._run_hndl_next(si, [], [], {}, 0, false, 0, args);
 	};
@@ -128,4 +129,4 @@ function f4(hndl) { console.log('f4', arguments, hndl.each); hndl.continue(4, 5)
 function f5(hndl) { console.log('f5', arguments); hndl.return() }
 seq = [f1, f2, [f3], ['t1', 't2', f4], f5];
 foo = new jsasync;
-foo.run(seq, ['go']);
+foo.run(seq);
